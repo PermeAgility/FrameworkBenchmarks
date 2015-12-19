@@ -6,7 +6,7 @@ Implementation of TechEmpower framework benchmark
 Using standard PermeAgility release
 
 ## Versions
-PermeAgility-0.7.5
+PermeAgility-0.6.2
 
 ## URL
 http://localhost:1999

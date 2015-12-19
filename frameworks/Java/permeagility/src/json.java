@@ -6,7 +6,7 @@ import permeagility.web.Download;
 
 /** Test type 1: JSON serialization
  */
-public final class json extends Download {
+public class json extends Download {
 
     @Override public String getContentType() { return "application/json"; }
     

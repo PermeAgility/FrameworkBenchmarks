@@ -1,4 +1,5 @@
 
+import com.orientechnologies.orient.core.metadata.schema.OType;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 import java.util.HashMap;
 import permeagility.plus.json.JSONArray;
@@ -8,7 +9,7 @@ import permeagility.web.Download;
 
 /** Test type 3: Multiple Database Queries
  */
-public final class queries extends Download {
+public class queries extends Download {
 
     @Override public String getContentType() { return "application/json"; }
     
@@ -21,22 +22,16 @@ public final class queries extends Download {
             qn = Integer.parseInt(q);
         } catch (Exception e) {
         }
-        if (qn < 1) qn = 1;
-        if (qn > 500) qn = 500;
+        if (qn < 1) qn = 500;
 
         JSONArray ja = new JSONArray();
-        int i = 0;
-        do {
+        for (int i=0; i<qn; i++) {
             JSONObject jo = new JSONObject();
-            ODocument d = con.queryDocument("SELECT FROM World WHERE id="+Math.random()*10000);
-            if (d != null) {
-                jo.put("id", (int)d.field("id"));
-                jo.put("randomNumber", (int)d.field("randomNumber"));
-                ja.put(jo);
-                i++;
-            }
-        } while (i < qn);
-        
+            ODocument d = con.queryDocument("SELECT FROM World WHERE id="+Math.random()*10000+1);
+            jo.put("id", (int)d.field("id", OType.INTEGER));
+            jo.put("randomNumber", (int)d.field("randomNumber", OType.INTEGER));
+            ja.put(jo);
+        }
         return ja.toString().getBytes();
     }
 

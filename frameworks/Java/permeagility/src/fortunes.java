@@ -9,11 +9,11 @@ import permeagility.web.Weblet;
 
 /** Test type 4: Fortunes
  */
-public final class fortunes extends Weblet {
-
+public class fortunes extends Weblet {
+    
     @Override public String getPage(DatabaseConnection con, HashMap<String, String> parms) {
         QueryResult qr = con.query("SELECT FROM Fortune");
-        ODocument newDoc = new ODocument().field("id",0).field("message","Additional fortune added at request time.");
+        ODocument newDoc = new ODocument().field("id",13).field("message","Additional fortune added at request time");
         qr.append(newDoc);
 
         // Sort the new list
@@ -26,7 +26,7 @@ public final class fortunes extends Weblet {
                 return m1.compareTo(m2);
             }
         });
-
+        
         StringBuilder sb = new StringBuilder();
         for (int i=0;i<qr.size();i++) {
             String stringvalue = qr.getStringValue(i, "message");
@@ -35,15 +35,11 @@ public final class fortunes extends Weblet {
                 stringvalue = stringvalue.replace(">", "&gt;");
             }
 
-            sb.append("<tr><td>"+qr.getStringValue(i, "id")+"</td><td>"+stringvalue+"</td></tr>\n");
-            //System.out.println("Fortune:"+qr.getStringValue(i, "message"));
+            sb.append(row(column(qr.getStringValue(i, "id"))+column(stringvalue)));
+            System.out.println("Fortune:"+qr.getStringValue(i, "message"));
         }
-
-        return "<head><title>Fortunes</title></head>\n"
-            +"<body><table>\n"
-            +"<tr><th>"+"id"+"</th><th>"+"message"+"</th></tr>\n"
-            +sb.toString()
-            +"</table></body>";
+        
+        return head("Fortunes")+body(table("sortable",row(columnHeader("id")+columnHeader("message"))+sb.toString()));
     }
 
 }
