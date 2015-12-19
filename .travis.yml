@@ -182,6 +182,8 @@ env:
     #- "TESTDIR=Scala/finch"
     #- "TESTDIR=Ur/urweb"
 
+install: make get-deps
+
 before_install:
   - pip install colorama==0.3.1
   # Version 2.3 has a nice Counter() and other features
