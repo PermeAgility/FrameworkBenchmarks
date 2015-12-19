@@ -190,19 +190,22 @@ before_install:
   - pip install requests
   - echo "127.0.0.1 " `hostname` | sudo tee /etc/hosts
   - echo "127.0.0.1 localhost" | sudo tee /etc/hosts
+  # Configure Travis-CI build environment for TFB
+  #   e.g. setup databases, users, etc
+  - ./toolset/run-ci.py cisetup "$TESTDIR"
+
+install:
+  # Install prerequisites
+  - ./toolset/run-ci.py prereq "$TESTDIR"
+
+  # Install software for this framework
+  - ./toolset/run-ci.py install "$TESTDIR"
 
 services:
   - postgresql
 
 addons:
   postgresql: "9.3"
-  apt:
-    packages:
-      - mysql-server
-
-before_script:
-  - sudo ./config/travis_mysql_setup.sh
-  - mysql -uroot < config/create.sql
 
 script:
   # Pick one test in this directory and verify
