@@ -182,8 +182,6 @@ env:
     #- "TESTDIR=Scala/finch"
     #- "TESTDIR=Ur/urweb"
 
-install: make get-deps
-
 before_install:
   - pip install colorama==0.3.1
   # Version 2.3 has a nice Counter() and other features
@@ -192,6 +190,8 @@ before_install:
   - pip install requests
   - echo "127.0.0.1 " `hostname` | sudo tee /etc/hosts
   - echo "127.0.0.1 localhost" | sudo tee /etc/hosts
+
+install: true 
 
 services:
   - postgresql
