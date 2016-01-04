@@ -1,5 +1,4 @@
 
-import com.orientechnologies.orient.core.metadata.schema.OType;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 import java.util.HashMap;
 import permeagility.plus.json.JSONArray;
@@ -24,24 +23,17 @@ public class queries extends Download {
         }
         if (qn < 1) qn = 500;
 
-//        JSONArray ja = new JSONArray();
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        String comma = "";
+        JSONArray ja = new JSONArray();
         for (int i=0; i<qn; i++) {
-//            JSONObject jo = new JSONObject();
+            JSONObject jo = new JSONObject();
             ODocument d = con.queryDocument("SELECT FROM World WHERE id="+Math.random()*10000);
             if (d != null) {
-                sb.append(comma+"{\"id\":"+d.field("id")+",\"randomNumber\":+"+d.field("randomNumber")+"}");
-                if (comma.isEmpty()) comma = ",";
-                //jo.put("id", );
-                //jo.put("randomNumber", );
-                //ja.put(jo);
+                jo.put("id", (int)d.field("id"));
+                jo.put("randomNumber", (int)d.field("randomNumber"));
+                ja.put(jo);
             }
         }
-//        return ja.toString().getBytes();
-        sb.append("]");
-        return sb.toString().getBytes();
+        return ja.toString().getBytes();
     }
 
 }
