@@ -24,15 +24,24 @@ public class queries extends Download {
         }
         if (qn < 1) qn = 500;
 
-        JSONArray ja = new JSONArray();
+//        JSONArray ja = new JSONArray();
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        String comma = "";
         for (int i=0; i<qn; i++) {
-            JSONObject jo = new JSONObject();
-            ODocument d = con.queryDocument("SELECT FROM World WHERE id="+Math.random()*10000+1);
-            jo.put("id", (int)d.field("id", OType.INTEGER));
-            jo.put("randomNumber", (int)d.field("randomNumber", OType.INTEGER));
-            ja.put(jo);
+//            JSONObject jo = new JSONObject();
+            ODocument d = con.queryDocument("SELECT FROM World WHERE id="+Math.random()*10000);
+            if (d != null) {
+                sb.append(comma+"{\"id\":"+d.field("id")+",\"randomNumber\":+"+d.field("randomNumber")+"}");
+                if (comma.isEmpty()) comma = ",";
+                //jo.put("id", );
+                //jo.put("randomNumber", );
+                //ja.put(jo);
+            }
         }
-        return ja.toString().getBytes();
+//        return ja.toString().getBytes();
+        sb.append("]");
+        return sb.toString().getBytes();
     }
 
 }

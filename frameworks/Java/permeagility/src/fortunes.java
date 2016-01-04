@@ -10,7 +10,7 @@ import permeagility.web.Weblet;
 /** Test type 4: Fortunes
  */
 public class fortunes extends Weblet {
-    
+
     @Override public String getPage(DatabaseConnection con, HashMap<String, String> parms) {
         QueryResult qr = con.query("SELECT FROM Fortune");
         ODocument newDoc = new ODocument().field("id",13).field("message","Additional fortune added at request time");
@@ -26,7 +26,7 @@ public class fortunes extends Weblet {
                 return m1.compareTo(m2);
             }
         });
-        
+
         StringBuilder sb = new StringBuilder();
         for (int i=0;i<qr.size();i++) {
             String stringvalue = qr.getStringValue(i, "message");
@@ -36,9 +36,9 @@ public class fortunes extends Weblet {
             }
 
             sb.append(row(column(qr.getStringValue(i, "id"))+column(stringvalue)));
-            System.out.println("Fortune:"+qr.getStringValue(i, "message"));
+            //System.out.println("Fortune:"+qr.getStringValue(i, "message"));
         }
-        
+
         return head("Fortunes")+body(table("sortable",row(columnHeader("id")+columnHeader("message"))+sb.toString()));
     }
 
