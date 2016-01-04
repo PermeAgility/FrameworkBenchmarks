@@ -13,7 +13,7 @@ public class db extends Download {
     @Override public String getContentDisposition() { return null; }
     
     @Override public byte[] getBytes(DatabaseConnection con, HashMap<String, String> parms) {
-        ODocument d = con.queryDocument("SELECT FROM World WHERE id="+Math.random()*10000+1);
+        ODocument d = con.queryDocument("SELECT FROM World WHERE id="+Math.random()*10000);
         if (d != null) {
             return d.toJSON().getBytes();
         } else {
