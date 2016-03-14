@@ -2,11 +2,12 @@
   (:require [hello.layout :as layout]
             [hello.db.core :as db]
             [compojure.core :refer [defroutes GET]]
-            [ring.util.response :refer [response]]
+            [ring.util.response :refer [response content-type]]
             [clojure.java.io :as io]))
 
-(def json-serialization
+(defn json-serialization
   "Test 1: JSON serialization"
+  []
   (response {:message "Hello, World!"}))
 
 (defn single-query-test
@@ -35,15 +36,18 @@
 
 (def plaintext
   "Test 6: Plaintext"
-  {:status 200
-   :headers {"Content-Type" "text/plain"}
-   :body "Hello, World!"})
+  (->
+    (response "Hello, World!")
+    (content-type "text/plain")))
+
 
 (defroutes home-routes
   (GET "/"                 [] "Hello, World!")
   (GET "/plaintext"        [] plaintext)
-  (GET "/json"             [] json-serialization)
+  (GET "/json"             [] (json-serialization))
   (GET "/db"               [] (single-query-test))
+  (GET "/queries/"         [] (multiple-query-test 1))
   (GET "/queries/:queries" [queries] (multiple-query-test queries))
   (GET "/fortunes"         [] (fortunes))
-  (GET "/updates/:queries"  [queries] (db-update queries)))
+  (GET "/updates/"         [] (db-update 1))
+  (GET "/updates/:queries" [queries] (db-update queries)))
