@@ -6,7 +6,7 @@ import permeagility.web.Download;
 
 /** Test type 2: Single Database Query
  */
-public class db extends Download {
+public final class db extends Download {
 
     @Override public String getContentType() { return "application/json"; }
     

@@ -8,7 +8,7 @@ import permeagility.web.Download;
 
 /** Test type 5: Database updates
  */
-public class updates extends Download {
+public final class updates extends Download {
 
     @Override public String getContentType() { return "application/json"; }
 
