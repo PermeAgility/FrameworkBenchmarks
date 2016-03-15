@@ -9,7 +9,7 @@ import permeagility.web.Weblet;
 
 /** Test type 4: Fortunes
  */
-public class fortunes extends Weblet {
+public final class fortunes extends Weblet {
 
     @Override public String getPage(DatabaseConnection con, HashMap<String, String> parms) {
         QueryResult qr = con.query("SELECT FROM Fortune");

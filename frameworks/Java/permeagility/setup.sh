@@ -1,6 +1,6 @@
 #!/bin/bash
 
-fw_depends java8 maven
-export JAVA_HOME=/opt/java8
+fw_depends java maven
+
 mvn clean package
-java -jar target/permeagility-0.7.5-jar-with-dependencies.jar
+java -jar target/permeagility-0.1.0-SNAPSHOT-benchmark.jar &
