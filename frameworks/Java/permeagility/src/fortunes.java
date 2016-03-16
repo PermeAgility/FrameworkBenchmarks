@@ -39,7 +39,7 @@ public final class fortunes extends Weblet {
             //System.out.println("Fortune:"+qr.getStringValue(i, "message"));
         }
 
-        return head("Fortunes")+body(table("sortable",row(columnHeader("id")+columnHeader("message"))+sb.toString()));
+        return "<head><title>Fortunes</title></head><body>"+table("sortable",row(columnHeader("id")+columnHeader("message"))+sb.toString())+"</body>";
     }
 
 }

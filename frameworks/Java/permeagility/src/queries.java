@@ -21,7 +21,8 @@ public final class queries extends Download {
             qn = Integer.parseInt(q);
         } catch (Exception e) {
         }
-        if (qn < 1) qn = 500;
+        if (qn < 1) qn = 1;
+        if (qn > 500) qn = 500;
 
         JSONArray ja = new JSONArray();
         for (int i=0; i<qn; i++) {
