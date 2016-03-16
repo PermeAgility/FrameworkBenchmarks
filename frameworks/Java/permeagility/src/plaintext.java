@@ -7,7 +7,7 @@ import permeagility.web.Download;
  */
 public final class plaintext extends Download {
 
-    @Override public String getContentType() { return "application/json"; }
+    @Override public String getContentType() { return "text/plain"; }
     
     @Override public String getContentDisposition() { return null; }
     
