@@ -13,7 +13,7 @@ public final class fortunes extends Weblet {
 
     @Override public String getPage(DatabaseConnection con, HashMap<String, String> parms) {
         QueryResult qr = con.query("SELECT FROM Fortune");
-        ODocument newDoc = new ODocument().field("id",13).field("message","Additional fortune added at request time");
+        ODocument newDoc = new ODocument().field("id",0).field("message","Additional fortune added at request time");
         qr.append(newDoc);
 
         // Sort the new list
@@ -35,11 +35,15 @@ public final class fortunes extends Weblet {
                 stringvalue = stringvalue.replace(">", "&gt;");
             }
 
-            sb.append(row(column(qr.getStringValue(i, "id"))+column(stringvalue)));
+            sb.append("<tr>"+column(qr.getStringValue(i, "id"))+column(stringvalue)+"</tr>");
             //System.out.println("Fortune:"+qr.getStringValue(i, "message"));
         }
 
-        return "<head><title>Fortunes</title></head><body>"+table("sortable",row(columnHeader("id")+columnHeader("message"))+sb.toString())+"</body>";
+        return "<head><title>Fortunes</title></head><body>"
+            +table("sortable",
+                "<tr>"+columnHeader("id")+columnHeader("message")+"</tr>"
+                +sb.toString())
+            +"</body>";
     }
 
 }
