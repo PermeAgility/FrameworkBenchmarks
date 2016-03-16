@@ -21,7 +21,8 @@ public final class updates extends Download {
             qn = Integer.parseInt(q);
         } catch (Exception e) {
         }
-        if (qn < 1) qn = 500;
+        if (qn < 1) qn = 1;
+        if (qn > 500) qn = 500;
 
         JSONArray ja = new JSONArray();
         for (int i=0; i<qn; i++) {
@@ -30,8 +31,8 @@ public final class updates extends Download {
             if (d != null) {
                 int id = (int)d.field("id", OType.INTEGER);
                 int newRand = (int)(Math.random()*10000);
-                con.update("UPDATE "+d.getIdentity().toString()+" SET randomNumber=" + newRand + " LOCK RECORD");
-//                d.field("randomNumber",newRand).save();
+//                con.update("UPDATE "+d.getIdentity().toString()+" SET randomNumber=" + newRand + " LOCK RECORD");
+                d.field("randomNumber",newRand).save();
                 jo.put("id", id);
                 jo.put("randomNumber", newRand);
                 ja.put(jo);
