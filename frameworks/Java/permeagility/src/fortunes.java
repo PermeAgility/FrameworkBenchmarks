@@ -35,15 +35,15 @@ public final class fortunes extends Weblet {
                 stringvalue = stringvalue.replace(">", "&gt;");
             }
 
-            sb.append("<tr>"+column(qr.getStringValue(i, "id"))+column(stringvalue)+"</tr>");
+            sb.append("<tr><td>"+qr.getStringValue(i, "id")+"</td><td>"+stringvalue+"</td></tr>\n");
             //System.out.println("Fortune:"+qr.getStringValue(i, "message"));
         }
 
-        return "<head><title>Fortunes</title></head><body>"
-            +table(
-                "<tr>"+columnHeader("id")+columnHeader("message")+"</tr>"
-                +sb.toString())
-            +"</body>";
+        return "<head><title>Fortunes</title></head>\n"
+            +"<body><table>\n"
+            +"<tr><th>"+"id"+"</th><th>"+"message"+"</th></tr>\n"
+            +sb.toString()
+            +"</table></body>";
     }
 
 }
