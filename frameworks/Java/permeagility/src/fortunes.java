@@ -13,7 +13,7 @@ public final class fortunes extends Weblet {
 
     @Override public String getPage(DatabaseConnection con, HashMap<String, String> parms) {
         QueryResult qr = con.query("SELECT FROM Fortune");
-        ODocument newDoc = new ODocument().field("id",0).field("message","Additional fortune added at request time");
+        ODocument newDoc = new ODocument().field("id",0).field("message","Additional fortune added at request time.");
         qr.append(newDoc);
 
         // Sort the new list
