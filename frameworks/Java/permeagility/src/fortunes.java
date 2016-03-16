@@ -40,7 +40,7 @@ public final class fortunes extends Weblet {
         }
 
         return "<head><title>Fortunes</title></head><body>"
-            +table("sortable",
+            +table(
                 "<tr>"+columnHeader("id")+columnHeader("message")+"</tr>"
                 +sb.toString())
             +"</body>";
