@@ -25,15 +25,18 @@ public final class queries extends Download {
         if (qn > 500) qn = 500;
 
         JSONArray ja = new JSONArray();
-        for (int i=0; i<qn; i++) {
+        int i = 0;
+        do {
             JSONObject jo = new JSONObject();
             ODocument d = con.queryDocument("SELECT FROM World WHERE id="+Math.random()*10000);
             if (d != null) {
                 jo.put("id", (int)d.field("id"));
                 jo.put("randomNumber", (int)d.field("randomNumber"));
                 ja.put(jo);
+                i++;
             }
-        }
+        } while (i < qn);
+        
         return ja.toString().getBytes();
     }
 
