@@ -15,7 +15,7 @@ public final class db extends Download {
     @Override public byte[] getBytes(DatabaseConnection con, HashMap<String, String> parms) {
         ODocument d = con.queryDocument("SELECT FROM World WHERE id="+Math.random()*10000);
         if (d != null) {
-            return d.toJSON().getBytes();
+            return d.toJSON("").getBytes();
         } else {
             return null;
         }
