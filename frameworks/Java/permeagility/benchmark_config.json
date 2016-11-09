@@ -20,8 +20,8 @@
       "webserver": "None",
       "os": "Linux",
       "database_os": "Linux",
-      "display_name": "permeagility",
-      "notes": "PermeAgility 0.7.5",
+      "display_name": "PermeAgility",
+      "notes": "PermeAgility 0.8.0",
       "versus": ""
     }
   }]
